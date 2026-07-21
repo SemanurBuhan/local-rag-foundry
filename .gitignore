@@ -3,6 +3,8 @@ node_modules/
 
 # Veritabanı (indeksleme çıktısı)
 *.db
+*.db-wal
+*.db-shm
 *.sqlite
 *.sqlite3
 

@@ -8,7 +8,7 @@ export const config = {
   model: {
     alias: "phi-3.5-mini",
     temperature: 0.1,
-    maxTokens: 400,
+    maxTokens: 600,
   },
   chunk: {
     size: 200,
@@ -20,6 +20,7 @@ export const config = {
   paths: {
     docsDir: path.join(ROOT_DIR, "docs"),
     dbPath: path.join(ROOT_DIR, "data", "rag.db"),
+    publicDir: path.join(ROOT_DIR, "public"),
   },
   server: {
     port: 3000,
