@@ -19,6 +19,9 @@
   "dependencies": {
     "better-sqlite3": "^11.3.0",
     "express": "^4.19.2",
-    "foundry-local-sdk": "^0.3.0"
+    "foundry-local-sdk": "^1.2.3"
+  },
+  "overrides": {
+    "adm-zip": "^0.6.0"
   }
 }

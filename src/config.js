@@ -7,13 +7,15 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 export const config = {
   model: {
     alias: "phi-3.5-mini",
+    temperature: 0.1,
+    maxTokens: 400,
   },
   chunk: {
     size: 200,
     overlap: 25,
   },
   retrieval: {
-    topK: 4,
+    topK: 2,
   },
   paths: {
     docsDir: path.join(ROOT_DIR, "docs"),
