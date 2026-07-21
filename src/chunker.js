@@ -21,3 +21,19 @@ export function splitIntoChunks(
   }
   return chunks;
 }
+
+export function tokenizeForVector(text) {
+  return text
+    .toLocaleLowerCase("tr-TR")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+export function computeTermFrequency(tokens) {
+  const termFrequency = new Map();
+  for (const token of tokens) {
+    termFrequency.set(token, (termFrequency.get(token) ?? 0) + 1);
+  }
+  return termFrequency;
+}
