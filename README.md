@@ -1,7 +1,7 @@
-# 🧠 Yerel RAG Destek Asistanı (Foundry Local)
+# 🔐 Yerel Siber Güvenlik Destek Asistanı (Foundry Local)
 
-> Tamamen **çevrimdışı** çalışan, dokümanlarınıza soru sorabildiğiniz bir yapay zeka asistanı.
-> Bulut yok, API anahtarı yok, dış ağ çağrısı yok — her şey laptop üzerinde.
+> Tamamen **çevrimdışı** çalışan, siber güvenlik dokümanlarınıza soru sorabildiğiniz bir yapay zeka asistanı.
+> Bulut yok, API anahtarı yok, dış ağ çağrısı yok — hassas veriler cihazdan hiç çıkmaz.
 
 **Microsoft AI Innovators Summer Internship** kapsamında geliştirilmiştir.
 
@@ -9,10 +9,20 @@
 
 ## 📌 Proje Nedir?
 
-İnternet bağlantısının bulunmadığı ortamlarda (uzak saha, fabrika, yeraltı tesisi)
-çalışan bir yapay zeka destek asistanı. **RAG (Retrieval-Augmented Generation)** deseni
-sayesinde model, cevaplarını uydurmak yerine yüklenen dokümanlardan üretir; böylece
-daha az halüsinasyon ve izlenebilir cevaplar sağlar.
+Güvenlik ekipleri hassas verilerle çalışır; bir bulut yapay zekasına soru sormak veri
+sızıntısı riski taşır. Bu proje, **tamamen yerel (offline)** çalışan bir siber güvenlik
+destek asistanıdır. İnternet bağlantısı olmayan veya güvenlik gereği izole (air-gapped)
+ortamlarda, bir güvenlik analistinin sorularını yüklenen dokümanlardan cevaplar.
+
+**RAG (Retrieval-Augmented Generation)** deseni sayesinde model, cevaplarını uydurmak
+yerine yüklenen güvenlik dokümanlarından üretir; böylece daha az halüsinasyon ve
+izlenebilir cevaplar sağlar.
+
+### Örnek Sorular
+- "SQL injection saldırısı nasıl önlenir?"
+- "OWASP Top 10'da Broken Access Control nedir?"
+- "Güvenli parola saklama için ne yapmalıyım?"
+- "XSS saldırısı türleri nelerdir?"
 
 ---
 
@@ -34,13 +44,13 @@ flowchart TD
 
 ```mermaid
 sequenceDiagram
-    participant K as Kullanıcı
+    participant K as Güvenlik Analisti
     participant S as Sunucu
     participant R as RAG Pipeline
     participant V as SQLite (Vektörler)
     participant M as Phi-3.5 Mini
 
-    K->>S: Soru gönderir
+    K->>S: Güvenlik sorusu gönderir
     S->>R: Soruyu iletir
     R->>V: İlgili doküman parçalarını arar (retrieval)
     V-->>R: En ilgili parçalar
@@ -63,6 +73,22 @@ sequenceDiagram
 | Erişim (Retrieval) | TF-IDF vektörleştirme |
 
 **Bağımlılıklar:** `express`, `foundry-local-sdk`, `better-sqlite3` (framework yok, Docker yok, build adımı yok)
+
+---
+
+## 📂 Bilgi Tabanı
+
+Asistanın uzmanlık alanı `docs/` klasöründeki siber güvenlik dokümanlarından oluşur:
+
+- `owasp-top-10.md` — OWASP Top 10 web uygulama güvenlik riskleri
+- `ag-guvenligi-temelleri.md` — Temel ağ güvenliği kavramları
+- `guvenli-kod-yazma.md` — Güvenli kod yazma pratikleri
+- `saldiri-turleri.md` — Yaygın saldırı türleri (XSS, CSRF, phishing, ransomware...)
+- `savunma-ve-araclar.md` — Savunma yöntemleri ve araçlar (SIEM, IDS/IPS, pentest)
+- `kriptografi-ve-kimlik.md` — Kriptografi, hashing, JWT, OAuth, MFA
+- `uygulama-ve-sistem-guvenligi.md` — API, bulut, container ve mobil güvenliği
+
+Yeni bir doküman eklemek için `docs/` klasörüne `.md` dosyası koyup `npm run ingest` komutunu tekrar çalıştırman yeterli.
 
 ---
 
@@ -93,7 +119,7 @@ Ardından tarayıcıdan aç: **http://127.0.0.1:3000**
 
 > Projenin ne yaptığını, özelliklerini ve bu projeden neler öğrendiğimi anlattığım video:
 
-**▶️ ...
+**▶️ ....
 
 ---
 
@@ -103,6 +129,7 @@ Ardından tarayıcıdan aç: **http://127.0.0.1:3000**
 - Yerel (offline) LLM çalıştırmayı — Foundry Local & Phi-3.5 Mini
 - TF-IDF ile basit ama etkili bir vektör arama (retrieval) yapmayı
 - Express.js ile SSE (Server-Sent Events) kullanarak durum bildirimi göndermeyi
+- Veri gizliliğinin (air-gapped / offline AI) neden önemli olduğunu
 - Clean Code / SOLID prensiplerini gerçek bir projede uygulamayı
 - Git branch stratejisi ile düzenli bir commit geçmişi oluşturmayı
 
@@ -110,7 +137,7 @@ Ardından tarayıcıdan aç: **http://127.0.0.1:3000**
 
 ## 📄 Dokümantasyon
 
-Gereksinim analizi ve mühendislik dokümanı için: [`GEREKSINIM_DOKUMANI.md`](./GEREKSINIM_DOKUMANI.md)
+Gereksinim analizi ve mühendislik dokümanı için: [GEREKSINIM_DOKUMANI.md](./GEREKSINIM_DOKUMANI.md)
 
 ---
 
