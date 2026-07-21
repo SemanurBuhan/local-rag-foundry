@@ -1,0 +1,27 @@
+# Bağımlılıklar
+node_modules/
+
+# Veritabanı (indeksleme çıktısı)
+*.db
+*.sqlite
+*.sqlite3
+
+# Ortam değişkenleri
+.env
+.env.local
+
+# Loglar
+*.log
+npm-debug.log*
+
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+
+# Editör
+.vscode/
+.idea/
+
+# Model önbelleği (varsa, büyük dosyalar)
+models/
+*.onnx
