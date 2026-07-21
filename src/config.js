@@ -8,7 +8,7 @@ export const config = {
   model: {
     alias: "phi-3.5-mini",
     temperature: 0.1,
-    maxTokens: 600,
+    maxTokens: 150,
   },
   chunk: {
     size: 200,

@@ -1,6 +1,8 @@
 import express from "express";
 import { config } from "./config.js";
 import { initChatEngine, isReady, answerQuestion } from "./chatEngine.js";
+import { getSystemMetrics } from "./metrics.js";
+import { getChunkCount } from "./vectorStore.js";
 
 const app = express();
 app.use(express.json());
@@ -28,6 +30,16 @@ app.get("/api/status/stream", (req, res) => {
 
   statusSubscribers.add(res);
   req.on("close", () => statusSubscribers.delete(res));
+});
+
+app.get("/api/metrics", (req, res) => {
+  let vdb = 0;
+  try {
+    vdb = getChunkCount();
+  } catch (err) {
+    // Veri tabanı henüz hazır değilse 0 döneriz.
+  }
+  res.json({ ...getSystemMetrics(), vdb, modelReady: isReady() });
 });
 
 app.post("/api/chat", async (req, res) => {

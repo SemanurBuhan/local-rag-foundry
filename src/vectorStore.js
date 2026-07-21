@@ -113,6 +113,12 @@ export function indexChunks(chunksData) {
   return chunksData.length;
 }
 
+export function getChunkCount() {
+  const database = getDb();
+  const row = database.prepare("SELECT COUNT(*) AS n FROM chunks").get();
+  return row.n;
+}
+
 export function loadVocabulary() {
   const database = getDb();
   const rows = database.prepare("SELECT term, idf FROM vocabulary").all();
