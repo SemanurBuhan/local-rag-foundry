@@ -162,6 +162,14 @@
       overflow-y: auto;
     }
 
+    .brand-rail.collapsed {
+      display: none;
+    }
+
+    .console.rail-hidden {
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    }
+
     .hero-logo {
       width: 100%;
       max-width: 320px;
@@ -1278,6 +1286,15 @@
         try { localStorage.setItem(THEME_KEY, theme); } catch (e) { }
       });
       settingsBtn.addEventListener("click", function () { settingsOverlay.hidden = false; });
+      var menuBtn = document.getElementById("menuBtn");
+      var brandRail = document.querySelector(".brand-rail");
+      if (menuBtn && brandRail) {
+        var consoleEl = document.querySelector(".console");
+        menuBtn.addEventListener("click", function () {
+          brandRail.classList.toggle("collapsed");
+          if (consoleEl) consoleEl.classList.toggle("rail-hidden");
+        });
+      }
       closeSettings.addEventListener("click", function () { settingsOverlay.hidden = true; });
       settingsOverlay.addEventListener("click", function (e) { if (e.target === settingsOverlay) settingsOverlay.hidden = true; });
 
