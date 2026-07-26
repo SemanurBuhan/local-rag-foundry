@@ -31,6 +31,26 @@
       --glow-soft: rgba(0, 255, 156, 0.12);
     }
 
+    html[data-theme="green"],
+    html[data-theme="green"] * {
+      cursor: url("/cursor-green.png") 4 4, auto;
+    }
+
+    html[data-theme="cyan"],
+    html[data-theme="cyan"] * {
+      cursor: url("/cursor-cyan.png") 4 4, auto;
+    }
+
+    html[data-theme="purple"],
+    html[data-theme="purple"] * {
+      cursor: url("/cursor-purple.png") 4 4, auto;
+    }
+
+    html[data-theme="red"],
+    html[data-theme="red"] * {
+      cursor: url("/cursor-red.png") 4 4, auto;
+    }
+
     html[data-theme="cyan"] {
       --accent: #26d7f5;
       --accent-dim: #0f97b0;
@@ -496,6 +516,62 @@
       align-items: center;
       gap: 10px;
       padding: 3px 0;
+    }
+
+    .radar-scan {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .radar-scan .ring-outer {
+      transform-origin: 17px 17px;
+      animation: radar-spin 3s linear infinite;
+    }
+
+    .radar-scan .ring-inner {
+      transform-origin: 17px 17px;
+      animation: radar-spin-rev 2s linear infinite;
+    }
+
+    .radar-scan .radar-core {
+      transform-origin: 17px 17px;
+      animation: radar-pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes radar-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes radar-spin-rev {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @keyframes radar-pulse {
+
+      0%,
+      100% {
+        opacity: 0.25;
+        transform: scale(0.7);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
     }
 
     .typing-dots {
@@ -1456,7 +1532,12 @@
         var bubble = document.createElement("div");
         bubble.className = "bubble assistant-bubble";
         bubble.innerHTML =
-          '<div class="typing-row"><div class="typing-dots"><span></span><span></span><span></span></div>' +
+          '<div class="typing-row">' +
+          '<svg class="radar-scan" viewBox="0 0 34 34" fill="none" stroke="currentColor">' +
+          '<circle class="ring-outer" cx="17" cy="17" r="15" stroke-width="1.5" stroke-dasharray="18 6" opacity="0.9"/>' +
+          '<circle class="ring-inner" cx="17" cy="17" r="9" stroke-width="1.5" stroke-dasharray="10 5" opacity="0.7"/>' +
+          '<circle class="radar-core" cx="17" cy="17" r="3" fill="currentColor" stroke="none"/>' +
+          '</svg>' +
           '<span class="typing-note"></span></div>';
         row.appendChild(avatar); row.appendChild(bubble);
         chatScroll.appendChild(row);
@@ -1467,8 +1548,8 @@
         var noteTimer = setInterval(function () {
           if (!noteEl.isConnected) { clearInterval(noteTimer); return; }
           var secs = Math.floor((performance.now() - startedAt) / 1000);
-          noteEl.textContent = secs < 4 ? "" :
-            "yanıt üretiliyor (" + secs + "sn) — CPU üzerinde ilk yanıt 30-90 sn sürebilir";
+          noteEl.textContent =
+            "Kaynaklar taranıyor... (" + secs + "sn) — CPU üzerinde ilk yanıt 30-90 sn sürebilir";
         }, 1000);
 
         return { row: row, bubble: bubble, noteTimer: noteTimer };
