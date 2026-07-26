@@ -60,7 +60,7 @@
       var(--bg);
     color: var(--text);
     font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, "Courier New", monospace;
-    font-size: 16px;
+    font-size: 17px;
     overflow: hidden;
   }
   /* scanline overlay */
@@ -82,7 +82,7 @@
   .console {
     height: 100%;
     display: grid;
-    grid-template-columns: minmax(230px, 300px) minmax(0, 1fr) minmax(240px, 300px);
+    grid-template-columns: minmax(260px, 360px) minmax(0, 1fr) minmax(240px, 300px);
     gap: 18px;
   }
 
@@ -116,14 +116,15 @@
   }
   .hero-logo {
     width: 100%;
-    max-width: 260px;
+    max-width: 320px;
     height: auto;
     object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
     filter: drop-shadow(0 0 26px var(--glow));
   }
   .hero-sub {
     margin-top: 14px;
-    font-size: 13px;
+    font-size: 15px;
     letter-spacing: 4px;
     color: var(--text-dim);
     text-align: center;
@@ -145,7 +146,7 @@
     color: var(--text-dim);
   }
   .feature svg { width: 30px; height: 30px; color: var(--accent); filter: drop-shadow(0 0 6px var(--glow)); }
-  .feature span { font-size: 10px; letter-spacing: 1px; line-height: 1.4; color: var(--text-dim); }
+  .feature span { font-size: 12px; letter-spacing: 1px; line-height: 1.4; color: var(--text-dim); }
 
   /* ============ CENTER — chat console ============ */
   .chat-console {
@@ -233,7 +234,7 @@
   }
   .empty-state {
     margin: auto; text-align: center;
-    color: var(--text-faint); font-size: 14px; line-height: 1.9;
+    color: var(--text-faint); font-size: 16px; line-height: 1.9;
   }
   .empty-state .glyph { font-size: 40px; display: block; margin-bottom: 10px; color: var(--accent-dim); filter: drop-shadow(0 0 8px var(--glow)); }
 
@@ -252,7 +253,7 @@
     max-width: 74%;
     padding: 13px 17px;
     line-height: 1.65;
-    font-size: 15px;
+    font-size: 17px;
     border-radius: 14px;
     border: 1px solid var(--glow);
   }
@@ -271,13 +272,13 @@
   .bubble-text { white-space: pre-wrap; word-break: break-word; }
   .bubble-meta {
     display: flex; gap: 6px; margin-top: 7px;
-    font-size: 12px; color: var(--text-faint); justify-content: flex-end;
+    font-size: 13px; color: var(--text-faint); justify-content: flex-end;
   }
   .bubble-meta .check { color: var(--accent); }
   .bubble-sources {
     margin-top: 9px; padding-top: 9px;
     border-top: 1px dashed var(--glow);
-    font-size: 13px; color: var(--accent-dim);
+    font-size: 14px; color: var(--accent-dim);
   }
   .typing-row { display: flex; align-items: center; gap: 10px; padding: 3px 0; }
   .typing-dots { display: flex; gap: 5px; }
@@ -285,7 +286,7 @@
   .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
   .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes blink { 0%,80%,100% { opacity: 0.2; } 40% { opacity: 1; } }
-  .typing-note { font-size: 12px; color: var(--text-faint); }
+  .typing-note { font-size: 13px; color: var(--text-faint); }
   .cursor-blink::after { content: "▋"; color: var(--accent); animation: blink 1s steps(1) infinite; }
 
   /* input + chips */
@@ -300,7 +301,7 @@
     border: 1px solid var(--glow);
     border-radius: 10px;
     color: var(--text);
-    font-family: inherit; font-size: 15px;
+    font-family: inherit; font-size: 16px;
     padding: 13px 15px; outline: none;
   }
   #questionInput:focus { border-color: var(--accent); box-shadow: 0 0 12px var(--glow); }
@@ -327,7 +328,7 @@
     border: 1px solid var(--glow);
     border-radius: 8px;
     color: var(--text-dim);
-    font-family: inherit; font-size: 13px;
+    font-family: inherit; font-size: 14px;
     padding: 8px 13px; cursor: pointer; white-space: nowrap;
     transition: color 0.15s, box-shadow 0.15s, border-color 0.15s;
   }
@@ -350,13 +351,13 @@
   }
   .card h3 {
     margin: 0 0 13px;
-    font-size: 13px; letter-spacing: 2px; color: var(--accent);
+    font-size: 14px; letter-spacing: 2px; color: var(--accent);
     text-shadow: 0 0 10px var(--glow);
     display: flex; align-items: center; gap: 8px;
   }
   .card h3 svg { width: 16px; height: 16px; }
   .src-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
-  .src-list li { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--text-dim); align-items: center; }
+  .src-list li { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; color: var(--text-dim); align-items: center; }
   .src-list li .chk {
     color: var(--accent); font-size: 11px;
     border: 1px solid var(--glow); border-radius: 3px;
@@ -365,17 +366,17 @@
   .card .total {
     margin-top: 13px; padding-top: 10px;
     border-top: 1px dashed var(--glow);
-    font-size: 13px; color: var(--text-faint);
+    font-size: 14px; color: var(--text-faint);
   }
   .kv { margin: 0; display: flex; flex-direction: column; gap: 10px; }
-  .kv > div { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; }
+  .kv > div { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
   .kv dt { color: var(--text-faint); margin: 0; }
   .kv dd { margin: 0; color: var(--text); text-align: right; font-weight: 600; }
   .model-icon { position: absolute; right: 14px; bottom: 14px; color: var(--accent); opacity: 0.5; }
   .model-icon svg { width: 34px; height: 34px; }
 
   .metric { margin-bottom: 12px; }
-  .metric-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; margin-bottom: 5px; }
+  .metric-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-bottom: 5px; }
   .metric-top .label { color: var(--text-dim); }
   .metric-top .val { color: var(--accent); font-weight: 600; }
   .spark { width: 100%; height: 22px; display: block; }
@@ -386,7 +387,7 @@
     display: flex; flex-direction: column; align-items: center; gap: 8px;
     text-align: center;
   }
-  .sys-footer .txt { font-size: 12px; letter-spacing: 2px; color: var(--accent); text-shadow: 0 0 10px var(--glow); }
+  .sys-footer .txt { font-size: 13px; letter-spacing: 2px; color: var(--accent); text-shadow: 0 0 10px var(--glow); }
   .sys-footer svg { width: 30px; height: 30px; color: var(--accent); filter: drop-shadow(0 0 8px var(--glow)); }
 
   /* ============ Settings overlay ============ */
@@ -430,7 +431,8 @@
   }
   .splash.hide { opacity: 0; pointer-events: none; }
   .splash-logo {
-    width: min(300px, 70vw); height: auto; object-fit: contain;
+    width: min(340px, 72vw); height: auto; object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
     filter: drop-shadow(0 0 40px var(--glow));
     animation: floaty 3s ease-in-out infinite;
   }
