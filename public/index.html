@@ -555,7 +555,7 @@
         <div class="card">
           <h3>MODEL BİLGİSİ</h3>
           <dl class="kv">
-            <div><dt>Model</dt><dd>Phi-3.5 Mini</dd></div>
+            <div><dt>Model</dt><dd id="modelName">—</dd></div>
             <div><dt>Platform</dt><dd>Foundry Local</dd></div>
             <div><dt>Çalışma Modu</dt><dd>Offline</dd></div>
             <div><dt>Veri Çıkışı</dt><dd>Engellendi</dd></div>
@@ -886,6 +886,7 @@
     if (s.hist.length > HIST_LEN) s.hist.shift();
     drawMetric(s);
   }
+  var modelNameEl = $("modelName");
   function pollMetrics() {
     fetch("/api/metrics")
       .then(function (r) { return r.json(); })
@@ -894,6 +895,7 @@
         if (typeof d.ram === "number") pushMetric("ram", d.ram);
         pushMetric("model", modelPct);
         if (typeof d.vdb === "number") pushMetric("vdb", d.vdb);
+        if (d.modelName) modelNameEl.textContent = d.modelName;
       })
       .catch(function () {});
   }

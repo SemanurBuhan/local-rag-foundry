@@ -6,7 +6,8 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 
 export const config = {
   model: {
-    alias: "phi-3.5-mini",
+    alias: "qwen2.5-1.5b",
+    displayName: "Qwen2.5 1.5B",
     temperature: 0.1,
     maxTokens: 150,
   },

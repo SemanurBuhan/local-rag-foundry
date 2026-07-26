@@ -24,7 +24,26 @@ export async function initChatEngine(onStatus) {
   chatClient = model.createChatClient();
   chatClient.settings.temperature = config.model.temperature;
   chatClient.settings.maxTokens = config.model.maxTokens;
+
+  // İlk gerçek soruda runtime'ın (thread pool, kernel seçimi vb.) soğuk
+  // başlaması kullanıcıyı beklettiği için burada sahte bir istekle ısıtıyoruz.
+  onStatus?.("yukleniyor");
+  await warmUp();
+
   onStatus?.("hazir");
+}
+
+async function warmUp() {
+  try {
+    const stream = chatClient.completeStreamingChat([
+      { role: "user", content: "Merhaba" },
+    ]);
+    for await (const _chunk of stream) {
+      // Çıktı önemli değil, tek amaç modeli ısıtmak.
+    }
+  } catch (err) {
+    console.warn("Warm-up isteği başarısız oldu (görmezden geliniyor):", err.message);
+  }
 }
 
 export function isReady() {

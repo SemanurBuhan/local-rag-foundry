@@ -39,7 +39,12 @@ app.get("/api/metrics", (req, res) => {
   } catch (err) {
     // Veri tabanı henüz hazır değilse 0 döneriz.
   }
-  res.json({ ...getSystemMetrics(), vdb, modelReady: isReady() });
+  res.json({
+    ...getSystemMetrics(),
+    vdb,
+    modelReady: isReady(),
+    modelName: config.model.displayName,
+  });
 });
 
 app.post("/api/chat", async (req, res) => {
@@ -51,11 +56,17 @@ app.post("/api/chat", async (req, res) => {
     return res.status(503).json({ error: "Model henüz hazır değil, lütfen bekleyin." });
   }
 
+  const t0 = Date.now();
+  const shortQ = question.trim().slice(0, 40);
+  console.log(`[chat] İstek geldi: "${shortQ}" @ ${new Date().toLocaleTimeString("tr-TR")}`);
   try {
     const result = await answerQuestion(question.trim());
+    const secs = ((Date.now() - t0) / 1000).toFixed(1);
+    console.log(`[chat] Yanıt üretildi (${secs}sn) — ${result.answer.length} karakter`);
     res.json(result);
   } catch (err) {
-    console.error("Cevap üretme hatası:", err);
+    const secs = ((Date.now() - t0) / 1000).toFixed(1);
+    console.error(`[chat] Hata (${secs}sn sonra):`, err);
     res.status(500).json({ error: "Cevap üretilirken bir hata oluştu." });
   }
 });
