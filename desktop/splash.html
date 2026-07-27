@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ShadowSec</title>
+  <style>
+    :root {
+      --bg: #050706;
+      --text: #d7e6de;
+      --text-dim: #7f9389;
+      --accent: #00ff9c;
+      --glow: rgba(0, 255, 156, 0.30);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(0, 255, 156, 0.06), transparent 60%),
+        var(--bg);
+    }
+    .logo {
+      width: clamp(72px, 18vmin, 140px);
+      filter: drop-shadow(0 0 24px var(--glow));
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50%      { transform: scale(1.06); opacity: 1; }
+    }
+    .title {
+      font-size: clamp(16px, 3vmin, 22px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 18px var(--glow);
+    }
+    .status { font-size: 13px; color: var(--text-dim); letter-spacing: 0.08em; }
+    .status::after {
+      content: "";
+      animation: dots 1.4s steps(4, end) infinite;
+    }
+    @keyframes dots {
+      0%   { content: ""; }
+      25%  { content: "."; }
+      50%  { content: ".."; }
+      75%  { content: "..."; }
+    }
+    .bar {
+      width: min(260px, 60vw);
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .bar i {
+      display: block;
+      height: 100%;
+      width: 40%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: slide 1.6s ease-in-out infinite;
+    }
+    @keyframes slide {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="../public/logo.png" alt="ShadowSec" />
+  <div class="title">ShadowSec</div>
+  <div class="bar"><i></i></div>
+  <div class="status" id="st">Sistem temizleniyor, sunucu başlatılıyor</div>
+  <script>
+    const stages = [
+      "Sistem temizleniyor, sunucu başlatılıyor",
+      "Zombi süreçler kapatılıyor",
+      "Tertemiz sunucu ayağa kaldırılıyor",
+      "Neredeyse hazır",
+    ];
+    let i = 0;
+    setInterval(() => {
+      i = Math.min(i + 1, stages.length - 1);
+      document.getElementById("st").textContent = stages[i];
+    }, 4000);
+  </script>
+</body>
+</html>

@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Foundry Local ile tamamen çevrimdışı çalışan siber güvenlik destek asistanı (RAG)",
   "type": "module",
-  "main": "src/server.js",
+  "main": "desktop/main.cjs",
   "scripts": {
     "start": "node src/server.js",
-    "ingest": "node src/ingest.js"
+    "ingest": "node src/ingest.js",
+    "app": "electron ."
   },
   "keywords": [
     "rag",
