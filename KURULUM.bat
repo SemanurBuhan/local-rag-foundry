@@ -25,6 +25,18 @@ if exist "node_modules\electron\dist\electron.exe" (
     )
 )
 
+rem npm kurulum betiklerini engellediyse electron.exe inmemis olabilir;
+rem indirme betigini elle calistir.
+if not exist "node_modules\electron\dist\electron.exe" (
+    echo        Electron motoru indiriliyor...
+    node "node_modules\electron\install.js"
+)
+if not exist "node_modules\electron\dist\electron.exe" (
+    echo  HATA: Electron motoru indirilemedi. Internet baglantinizi kontrol edin.
+    pause
+    exit /b 1
+)
+
 echo  [3/3] Masaustu kisayolu olusturuluyor...
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0desktop\create-shortcut.ps1"
 if errorlevel 1 (
