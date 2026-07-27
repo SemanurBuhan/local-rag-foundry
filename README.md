@@ -214,7 +214,7 @@ Ardından tarayıcıdan aç: **http://127.0.0.1:3000**
 
 > Projenin ne yaptığını, özelliklerini ve bu projeden neler öğrendiğimi anlattığım video:
 
-**▶️ ....
+**▶️ https://youtu.be/_sbF0yFRcT0
 
 ---
 
